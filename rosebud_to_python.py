@@ -14,14 +14,19 @@ class Application(tk.Tk):
         self.select_button.pack(pady=10)
 
         # Create a scrolled text widget to display the translation process
-        self.text_area = scrolledtext.ScrolledText(self, wrap=tk.WORD, width=70, height=20)
+        self.text_area = scrolledtext.ScrolledText(self, wrap=tk.WORD, width=70, height=20, bg="black", fg="white")
         self.text_area.pack(pady=10)
+
+        # Configure tags for different text styles
+        self.text_area.tag_configure("filename", foreground="#00FF00")  # Bright green
+        self.text_area.tag_configure("path", foreground="#FFFF00")      # Yellow
 
     # Step 2: File selection dialog
     def select_file(self):
         file_path = filedialog.askopenfilename()
         if file_path:
-            self.text_area.insert(tk.END, f"Selected file: {file_path}\n")
+            self.text_area.insert(tk.END, "Selected file: ", "path")
+            self.text_area.insert(tk.END, f"{file_path}\n", "filename")
             self.translate_file(file_path)
 
     # Step 3: Read the selected file
@@ -39,7 +44,8 @@ class Application(tk.Tk):
     def save_to_file(self, filename, code):
         with open(filename, 'w') as file:
             file.write(code)
-        self.text_area.insert(tk.END, f"Translated program saved to {filename}\n")
+        self.text_area.insert(tk.END, "Translated program saved to ", "path")
+        self.text_area.insert(tk.END, f"{filename}\n", "filename")
 
     # Step 6: Translate the selected file and display the process
     def translate_file(self, file_path):
