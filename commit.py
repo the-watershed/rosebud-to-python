@@ -7,7 +7,7 @@ def run_command(command):
         print(f"Error: {result.stderr}")
         sys.exit(result.returncode)
     return result.stdout
-
+20
 def main():
     commit_message = input("Enter commit message: ")
 
