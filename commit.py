@@ -1,7 +1,7 @@
 import subprocess
 import sys
 
-def run_command(command):
+def run_command(commaupdatend):
     result = subprocess.run(command, shell=True, capture_output=True, text=True)
     if result.returncode != 0:
         print(f"Error: {result.stderr}")
